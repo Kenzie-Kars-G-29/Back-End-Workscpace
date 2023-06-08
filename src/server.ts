@@ -9,6 +9,6 @@ AppDataSource.initialize()
       console.log(`Server is running on port ${process.env.PORT}!`);
     });
   })
-  .catch((err) => {
+  .catch((err: Error) => {
     console.log(err);
   });
