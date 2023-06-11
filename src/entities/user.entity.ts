@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { getRounds, hashSync } from "bcryptjs";
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity("users")
 class User {
@@ -10,6 +17,9 @@ class User {
 
   @Column({ length: 50 })
   email: string;
+
+  @Column({ length: 120 })
+  password: string;
 
   @Column({ length: 10 })
   cpf: string;
@@ -43,6 +53,15 @@ class User {
 
   @Column({ default: false })
   isSeller: boolean;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const isEncrypted = getRounds(this.password);
+    if (!isEncrypted) {
+      this.password = hashSync(this.password, 10);
+    }
+  }
 }
 
 export default User;

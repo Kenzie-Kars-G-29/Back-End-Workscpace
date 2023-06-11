@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { imageUrlReturnSchema, imageUrlSchema } from "./imgUrl.schema";
+import { imageUrlSchema } from "./imgUrl.schema";
 
 const createAnnouncementSchema = z.object({
   description: z.string(),

@@ -7,8 +7,6 @@ import {
   tAnnouncement,
   tAnnouncementWithImageReturn,
 } from "../../interfaces/announcement.interfaces";
-import { createAnnouncementWithImageReturnSchema } from "../../schema/announcement.schemas";
-import { tImageUrl } from "../../interfaces/imageUrl.interfaces";
 
 const updateAnnouncementService = async (
   id: string,

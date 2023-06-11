@@ -1,5 +1,4 @@
 import { Repository } from "typeorm";
-import Announcement from "../../entities/announcement.entity";
 import { AppDataSource } from "../../data-source";
 import { tAnnouncement } from "../../interfaces/announcement.interfaces";
 import ImageUrl from "../../entities/imageUrl.entity";
