@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import Announcement from "./announcement.entity";
 
 @Entity("images_urls")
@@ -27,7 +34,11 @@ class ImageUrl {
   @Column({ nullable: true })
   sixthImage: string;
 
-  @ManyToOne(() => Announcement)
+  // Relação one to one com Announcement
+  @OneToOne((type) => Announcement, (announcement) => announcement.image, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn()
   announcement: Announcement;
 }
 

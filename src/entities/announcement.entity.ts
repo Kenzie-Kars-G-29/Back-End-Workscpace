@@ -1,5 +1,14 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import User from "./user.entity";
+import ImageUrl from "./imageUrl.entity";
 
 @Entity("announcements")
 class Announcement {
@@ -36,8 +45,12 @@ class Announcement {
   @Column({})
   isPublic: boolean;
 
-  @ManyToOne(() => User)
-  sellerId: string;
+  //Relação many to one com User
+
+  //Relação one to one com ImageUrl
+  @OneToOne((type) => ImageUrl, (image) => image.announcement)
+  @JoinColumn()
+  image: ImageUrl;
 }
 
 export default Announcement;

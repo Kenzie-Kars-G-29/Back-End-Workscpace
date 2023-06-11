@@ -1,26 +1,40 @@
 import { Repository } from "typeorm";
 import {
-  announcement,
-  announcementReturn,
+  tAnnouncement,
+  tAnnouncementWithImageReturn,
 } from "../../interfaces/announcement.interfaces";
 import Announcement from "../../entities/announcement.entity";
 import { AppDataSource } from "../../data-source";
-import { createAnnouncementReturnSchema } from "../../schema/announcement.schemas";
+import { createAnnouncementWithImageReturnSchema } from "../../schema/announcement.schemas";
+import ImageUrl from "../../entities/imageUrl.entity";
+import { tImages } from "../../interfaces/imageUrl.interfaces";
 
 const createAnnouncementService = async (
-  body: announcement
-): Promise<announcementReturn> => {
+  announc: tAnnouncement,
+  images: tImages
+): Promise<tAnnouncementWithImageReturn> => {
   const repository: Repository<Announcement> =
     AppDataSource.getRepository(Announcement);
+  const imagesRepository: Repository<ImageUrl> =
+    AppDataSource.getRepository(ImageUrl);
 
-  const announcement: Announcement = repository.create(body);
+  const announcement: Announcement = repository.create(announc);
+  const imageUrl: ImageUrl = imagesRepository.create(images);
 
-  await repository.save(announcement);
+  const announcementResponse = await repository.save(announcement);
 
-//   const validatedReturn: announcementReturn =
-//     createAnnouncementReturnSchema.parse(announcement);
+  imageUrl.announcement = announcement;
+  const imageUrlResponse = await imagesRepository.save(imageUrl);
 
-  return announcement;
+  const response = {
+    ...announcementResponse,
+    images: { ...imageUrlResponse },
+  };
+
+  const validatedReturn: tAnnouncementWithImageReturn =
+    createAnnouncementWithImageReturnSchema.parse(response);
+
+  return validatedReturn;
 };
 
 export default createAnnouncementService;
