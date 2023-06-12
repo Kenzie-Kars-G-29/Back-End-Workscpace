@@ -46,7 +46,7 @@ class Announcement {
   isPublic: boolean;
 
   //Relação many to one com User
-  @ManyToOne(() => User, (user) => user.announcement)
+  @ManyToOne(() => User, (user) => user.announcement, {onDelete: "CASCADE"})
   user: User
   
   //Relação one to one com ImageUrl

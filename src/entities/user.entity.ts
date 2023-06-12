@@ -23,7 +23,7 @@ class User {
   @Column({ length: 120 })
   password: string;
 
-  @Column({ length: 10 })
+  @Column({ length: 12 })
   cpf: string;
 
   @Column({ length: 12 })
