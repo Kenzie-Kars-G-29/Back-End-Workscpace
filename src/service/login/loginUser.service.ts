@@ -27,6 +27,7 @@ const createLoginService = async (loginData: IUserLogin): Promise<string> => {
 
     const token: string = jwt.sign(
         {
+            isSeller: user!.isSeller,
             id: user!.id
         },
         process.env.SECRET_KEY!,
