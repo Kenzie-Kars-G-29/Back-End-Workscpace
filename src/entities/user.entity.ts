@@ -4,8 +4,10 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import Announcement from "./announcement.entity";
 
 @Entity("users")
 class User {
@@ -62,6 +64,10 @@ class User {
       this.password = hashSync(this.password, 10);
     }
   }
+
+  @OneToMany(() => Announcement, (announcement) => announcement.user)
+  announcement: Announcement[]
+  
 }
 
 export default User;

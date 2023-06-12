@@ -46,7 +46,9 @@ class Announcement {
   isPublic: boolean;
 
   //Relação many to one com User
-
+  @ManyToOne(() => User, (user) => user.announcement)
+  user: User
+  
   //Relação one to one com ImageUrl
   @OneToOne((type) => ImageUrl, (image) => image.announcement)
   @JoinColumn()
