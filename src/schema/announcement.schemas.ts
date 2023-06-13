@@ -23,6 +23,7 @@ const createAnnouncementReturnSchema = createAnnouncementSchema.extend({
 });
 
 const createAnnouncementWithImageReturnSchema = z.object({
+  id: z.string().uuid(),
   description: z.string(),
   brand: z.string(),
   model: z.string().max(50),
@@ -33,8 +34,9 @@ const createAnnouncementWithImageReturnSchema = z.object({
   price: z.string(),
   fipeTablePrice: z.string(),
   isPublic: z.boolean(),
-  id: z.string().uuid(),
+  userId: z.string(),
   images: z.object({
+    id: z.string().uuid(),
     coverImage: z.string(),
     firstImage: z.string(),
     secondImage: z.string(),
@@ -42,7 +44,6 @@ const createAnnouncementWithImageReturnSchema = z.object({
     fourthImage: z.string().nullable().default(null),
     fifthImage: z.string().nullable().default(null),
     sixthImage: z.string().nullable().default(null),
-    id: z.string().uuid(),
   }),
 }); // Provisório
 
