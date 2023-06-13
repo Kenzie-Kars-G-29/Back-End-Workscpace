@@ -1,19 +1,18 @@
 import { Repository } from "typeorm"
 import { AppDataSource } from "../../data-source"
 import User from "../../entities/user.entity"
-import { IAllUsersReturn } from "../../interfaces/user.interfaces"
-import { returnAllUsersSchema } from "../../schema/user.schemas"
 
-
-const listAllUsersService = async (): Promise<IAllUsersReturn>  => {
+const listAllUsersService = async () => {
 
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
-    const findUsers = await userRepository.find()
-
-    const allUsers =  returnAllUsersSchema.parse(findUsers)
+    const findUsers = await userRepository.find({
+        relations: {
+            announcement: true
+        }
+    })
     
-    return allUsers 
+    return findUsers 
 }
 
 export default listAllUsersService
