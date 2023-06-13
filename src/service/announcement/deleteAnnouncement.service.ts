@@ -7,7 +7,7 @@ const deleteAnnouncementService = async (id: string): Promise<void> => {
   const repository: Repository<Announcement> =
     AppDataSource.getRepository(Announcement);
 
-  const announcement = await repository.findOne({
+  const announcement: any = await repository.findOne({
     where: {
       id: id,
     },

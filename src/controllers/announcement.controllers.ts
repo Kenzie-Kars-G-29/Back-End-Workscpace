@@ -9,10 +9,12 @@ const createAnnouncementController = async (
   res: Response
 ): Promise<Response> => {
   const { images, ...announcement } = req.body;
+  const token: any = req.headers.authorization
 
   const announcementResponse = await createAnnouncementService(
     announcement,
-    images
+    images,
+    token
   );
 
   return res.status(201).json(announcementResponse);
