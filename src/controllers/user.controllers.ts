@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import createUserService from "../service/user/createUser.service"
 import listAllUsersService from "../service/user/listAllUsers.service"
+import listUserLoggedService from "../service/user/listUser.service"
 
 const createUserController = async (request: Request, response: Response) => {
     const userData = request.body
@@ -16,7 +17,16 @@ const listAllUsersController = async (request: Request, response: Response) => {
     return response.json(allUsers)
 }
 
+const listUserController = async (request: Request, response: Response) => {
+    const token: any = request.headers.authorization
+
+    const listUser = await listUserLoggedService(token)
+    
+    return response.json(listUser)
+}
+
 export {
     createUserController,
-    listAllUsersController
+    listAllUsersController,
+    listUserController
 }
