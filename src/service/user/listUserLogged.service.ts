@@ -1,7 +1,6 @@
 import { AppDataSource } from "../../data-source"
 import User from "../../entities/user.entity"
 import { AppError } from "../../errors"
-import { returnUserSchema } from "../../schema/user.schemas"
 import jwt from "jsonwebtoken"
 
 const listUserLoggedService = async (token: string) => {
