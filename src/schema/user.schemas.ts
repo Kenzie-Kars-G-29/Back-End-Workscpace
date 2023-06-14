@@ -22,7 +22,7 @@ const returnUserSchema = userSchema
   .extend({
     id: z.string(),
     announcements: z.array(createAnnouncementWithImageSchema).default([]),
-  }).omit({ password: true })
+  }).omit({password: true})
 
 const returnAllUsersSchema = returnUserSchema.array()
 
