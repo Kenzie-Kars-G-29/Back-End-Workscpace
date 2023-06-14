@@ -34,13 +34,13 @@ class Announcement {
   fuel: string;
 
   @Column({ type: "decimal", precision: 12, scale: 2, default: 0 })
-  km: number;
+  km: string;
 
   @Column({ type: "decimal", precision: 12, scale: 2, default: 0 })
-  price: number;
+  price: string;
 
   @Column({ type: "decimal", precision: 12, scale: 2, default: 0 })
-  fipeTablePrice: number;
+  fipeTablePrice: string;
 
   @Column({})
   isPublic: boolean;

@@ -2,6 +2,7 @@ import { AppDataSource } from "../../data-source"
 import User from "../../entities/user.entity"
 import { AppError } from "../../errors"
 import jwt from "jsonwebtoken"
+import { returnUserSchema } from "../../schema/user.schemas"
 
 const listUserLoggedService = async (token: string) => {
     const userRepository = AppDataSource.getRepository(User)
@@ -18,7 +19,7 @@ const listUserLoggedService = async (token: string) => {
     userId = decoded.id
     })
 
-    const user = await userRepository.find({
+    const user = await userRepository.findOne({
         where: {
             id: userId
         },
@@ -27,7 +28,9 @@ const listUserLoggedService = async (token: string) => {
         }
     })
 
-    return user
+    const returnedUser = returnUserSchema.parse(user)
+
+    return returnedUser
 }
 
 export default listUserLoggedService

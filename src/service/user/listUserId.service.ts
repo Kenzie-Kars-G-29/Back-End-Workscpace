@@ -5,7 +5,6 @@ import { returnUserSchema } from "../../schema/user.schemas"
 const listUserIdService = async (userId: string) => {
     const userRepository = AppDataSource.getRepository(User)
 
-
     const user = await userRepository.findOne({
         where: {
             id: userId
@@ -15,7 +14,9 @@ const listUserIdService = async (userId: string) => {
         }
     })
 
-    return user
+    const returnedUser = returnUserSchema.parse(user)
+
+    return returnedUser
 }
 
 export default listUserIdService
