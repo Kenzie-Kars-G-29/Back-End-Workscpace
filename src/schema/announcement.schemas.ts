@@ -8,9 +8,9 @@ const createAnnouncementSchema = z.object({
   color: z.string().max(20),
   year: z.string().max(4),
   fuel: z.string().max(9),
-  km: z.number(),
-  price: z.number(),
-  fipeTablePrice: z.number(),
+  km: z.string(),
+  price: z.string(),
+  fipeTablePrice: z.string(),
   isPublic: z.boolean(),
 });
 

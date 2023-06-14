@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { createAnnouncementWithImageSchema } from './announcement.schemas';
+import { createAnnouncementReturnSchema } from './announcement.schemas';
 
 const userSchema = z.object({
     name: z.string()
@@ -42,7 +42,7 @@ const userSchema = z.object({
 const returnUserSchema = userSchema
   .extend({
     id: z.string(),
-    announcements: z.array(createAnnouncementWithImageSchema).default([]),
+    announcement: z.array(createAnnouncementReturnSchema).default([]),
   }).omit({password: true})
 
 const returnAllUsersSchema = returnUserSchema.array()
