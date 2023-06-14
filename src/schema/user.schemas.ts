@@ -29,13 +29,13 @@ const userSchema = z.object({
       .max(45, {message: "maximo de 45 caracters"}),
     street: z.string()
       .min(3, {message: "mínimo de 3 caracters"})
-      .max(45, {message: "maximo de 3 caracters"}),
+      .max(45, {message: "maximo de 45 caracters"}),
     number: z.string()
       .min(1)
-      .max(5, {message: "maximo de 3 caracters"}),
+      .max(5, {message: "maximo de 5 caracters"}),
     complement: z.string()
       .min(3, {message: "mínimo de 3 caracters"})
-      .max(20, {message: "maximo de 3 caracters"}),
+      .max(20, {message: "maximo de 20 caracters"}),
     isSeller: z.boolean().default(false)
 })
 
