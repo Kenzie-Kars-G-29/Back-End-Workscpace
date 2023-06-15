@@ -1,11 +1,11 @@
 import { Router } from "express"
-import { createUserController, listAllUsersController, listUserController } from "../controllers/user.controllers"
+import { createUserController, listAllUsersController, listUserController, listUserIdController } from "../controllers/user.controllers"
 import ensureAuthMidlleware from "../middleware/ensureAuth.middleware"
-import ensureIsSellerMiddleware from "../middleware/user/ensureIsSeller"
 
 
 export const userRoutes = Router()
 
 userRoutes.post("", createUserController)
 userRoutes.get("", listAllUsersController)
-userRoutes.get("/user", ensureAuthMidlleware, ensureIsSellerMiddleware,listUserController)
+userRoutes.get("/userlogged", ensureAuthMidlleware,listUserController)
+userRoutes.get("/:id", listUserIdController)
