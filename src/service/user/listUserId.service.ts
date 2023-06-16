@@ -1,7 +1,6 @@
 import { AppDataSource } from "../../data-source"
 import User from "../../entities/user.entity"
 import { AppError } from "../../errors"
-import { returnUserSchema } from "../../schema/user.schemas"
 
 const listUserIdService = async (userId: string) => {
     const userRepository = AppDataSource.getRepository(User)
@@ -10,18 +9,28 @@ const listUserIdService = async (userId: string) => {
         where: {
             id: userId
         },
-        relations: {
-            announcement: true
-        }
+        relations: ['announcement', 'announcement.image'],
+        select: ['id', 
+        'name', 
+        'email', 
+        'cpf', 
+        'phone', 
+        'birthday', 
+        'description', 
+        'cep', 
+        'state', 
+        'city', 
+        'street', 
+        'number', 
+        'complement', 
+        'isSeller'],
     })
 
     if(!user){
         throw new AppError("User not found", 409)
     }
 
-    const returnedUser = returnUserSchema.parse(user)
-
-    return returnedUser
+    return user
 }
 
 export default listUserIdService
