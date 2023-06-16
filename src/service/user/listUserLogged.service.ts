@@ -23,14 +23,24 @@ const listUserLoggedService = async (token: string) => {
         where: {
             id: userId
         },
-        relations: {
-            announcement: true
-        }
+        relations: ['announcement', 'announcement.image'],
+        select: ['id', 
+        'name', 
+        'email', 
+        'cpf', 
+        'phone', 
+        'birthday', 
+        'description', 
+        'cep', 
+        'state', 
+        'city', 
+        'street', 
+        'number', 
+        'complement', 
+        'isSeller'],
     })
 
-    const returnedUser = returnUserSchema.parse(user)
-
-    return returnedUser
+    return user
 }
 
 export default listUserLoggedService
