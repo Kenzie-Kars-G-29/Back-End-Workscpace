@@ -11,13 +11,16 @@ const createAnnouncementController = async (
   const { images, ...announcement } = req.body;
   const token: any = req.headers.authorization
 
-  const announcementResponse = await createAnnouncementService(
+  const newAnnouncement = await createAnnouncementService(
     announcement,
     images,
     token
   );
+    
+  const {user, ...createAnnounRest} = newAnnouncement
+  const userId = user.id
 
-  return res.status(201).json(announcementResponse);
+  return res.status(201).json({...createAnnounRest, userId})
 };
 
 const listAnnouncementController = async (

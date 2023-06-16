@@ -16,7 +16,7 @@ const createAnnouncementService = async (
   announc: tAnnouncement,
   images: tImages,
   token: string
-): Promise<tAnnouncementWithImageReturn> => {
+) => {
   const repository: Repository<Announcement> =
     AppDataSource.getRepository(Announcement);
   const imagesRepository: Repository<ImageUrl> =
@@ -40,24 +40,25 @@ const createAnnouncementService = async (
     id: userId
 })
 
-  const announcement: Announcement = repository.create({...announc, user:findUser!});
-  const imageUrl: ImageUrl = imagesRepository.create(images);
+  const imageUrl: ImageUrl = imagesRepository.create({
+    ...images,
+  })
 
-  const announcementResponse = await repository.save(announcement);
+  await imagesRepository.save(imageUrl)
+  
+  const newAnnouncement: Announcement = repository.create({
+    ...announc,
+    user: findUser!,
+    image: imageUrl
+  })
 
-  imageUrl.announcement = announcement;
-  const imageUrlResponse = await imagesRepository.save(imageUrl);
+  await repository.save(newAnnouncement)
 
-  const response = {
-    ...announcementResponse,
-    images: { ...imageUrlResponse },
-    userId
-  };
+  imageUrl.announcement = newAnnouncement
+  
+  await imagesRepository.save(imageUrl)
 
-  const validatedReturn: tAnnouncementWithImageReturn =
-    createAnnouncementWithImageReturnSchema.parse(response);
-
-  return validatedReturn;
-};
+  return newAnnouncement
+}  
 
 export default createAnnouncementService;
