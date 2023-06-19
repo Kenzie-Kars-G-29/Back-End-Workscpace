@@ -67,7 +67,7 @@ class User {
 
   @OneToMany(() => Announcement, (announcement) => announcement.user)
   announcement: Announcement[]
-  
+
 }
 
 export default User;

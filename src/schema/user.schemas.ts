@@ -43,10 +43,14 @@ const returnUserSchema = userSchema
     announcement: z.array(createAnnouncementWithImageReturnSchema).default([]),
   }).omit({password: true})
 
+
 const returnAllUsersSchema = returnUserSchema.array()
 
+const userSchemaUpdate = userSchema.partial()
+
 export {
-    userSchema,
-    returnUserSchema,
-    returnAllUsersSchema  
+  userSchema,
+  returnUserSchema,
+  returnAllUsersSchema,
+  userSchemaUpdate
 }
