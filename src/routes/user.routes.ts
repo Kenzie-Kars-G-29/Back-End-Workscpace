@@ -14,3 +14,4 @@ userRoutes.get("/userlogged", ensureAuthMidlleware, listUserController)
 userRoutes.get("/:id", ensureAuthMidlleware, listUserIdController)
 userRoutes.patch("/:id", ensureAuthMidlleware, ensureDataIsValid(userSchemaUpdate), updateUserController)
 userRoutes.delete("/:id", ensureUserExistsMiddleware, deleteUserController)
+
