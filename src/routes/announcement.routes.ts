@@ -21,7 +21,7 @@ announcementRouter.post(
   createAnnouncementController
 ); // Token is required
 
-announcementRouter.get("", listAnnouncementController); // Token is required
+announcementRouter.get("", listAnnouncementController); 
 
 announcementRouter.put(
   "/:id",
