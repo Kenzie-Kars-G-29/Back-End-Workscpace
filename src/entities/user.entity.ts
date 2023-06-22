@@ -56,6 +56,9 @@ class User {
   @Column({ default: false })
   isSeller: boolean;
 
+  @Column({ nullable: true })
+  resetToken: string;
+
   @BeforeInsert()
   @BeforeUpdate()
   hashPassword() {

@@ -5,6 +5,16 @@ const loginSchema = z.object({
     password: z.string()
 })
 
+const resetPasswordSchema = z.object({
+    query: z.object({
+        token: z.string().nonempty(),
+    }),
+    body: z.object({
+        newPassword: z.string().min(6),
+    }),
+});
+
 export {
-    loginSchema
+    loginSchema,
+    resetPasswordSchema
 }
