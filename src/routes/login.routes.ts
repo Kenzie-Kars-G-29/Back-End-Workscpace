@@ -7,6 +7,6 @@ export const loginRouter: Router = Router()
 
 loginRouter.post("", ensureDataIsValid(loginSchema), createLoginController)
 loginRouter.post("/forgot-password", forgotPasswordController)
-loginRouter.patch("/reset-password", ensureDataIsValid(resetPasswordSchema), resetPasswordController)
+loginRouter.patch("/reset-password/:token", /* ensureDataIsValid(resetPasswordSchema), */ resetPasswordController)
 
 

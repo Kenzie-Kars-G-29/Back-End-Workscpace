@@ -24,6 +24,10 @@ export const forgotPasswordService = async (email: string/* userData: IUser */) 
         const resetToken = crypto.randomBytes(32).toString('hex');
         passwordResetTokens[user.id] = resetToken
 
+        await userRepository.save({
+            ...user, resetToken: resetToken
+        })
+
 
         const transporter = nodemailer.createTransport({
             host: process.env.EMAIL_HOST,
