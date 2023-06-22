@@ -27,8 +27,9 @@ const forgotPasswordController = async (request: Request, response: Response) =>
 }
 
 const resetPasswordController = async (request: Request, response: Response) => {
-    const { token } = request.body
+    const { token } = request.params
     const { newPassword } = request.body
+
     try {
         const result = await resetPasswordService(token, newPassword)
         return response.status(200).json(result)
@@ -36,6 +37,7 @@ const resetPasswordController = async (request: Request, response: Response) => 
         return response.status(500)
     }
 }
+
 
 export {
     createLoginController,
