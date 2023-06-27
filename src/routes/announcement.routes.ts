@@ -3,6 +3,7 @@ import {
   createAnnouncementController,
   deleteAnnouncementController,
   listAnnouncementController,
+  listAnnouncementIdController,
   updateAnnouncementController,
 } from "../controllers/announcement.controllers";
 import ensureDataIsValid from "../middleware/ensureDataIsValid.middleware";
@@ -22,6 +23,8 @@ announcementRouter.post(
 ); // Token is required
 
 announcementRouter.get("", listAnnouncementController); 
+
+announcementRouter.get("/:id", listAnnouncementIdController)
 
 announcementRouter.put(
   "/:id",

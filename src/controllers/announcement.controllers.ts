@@ -3,6 +3,7 @@ import createAnnouncementService from "../service/announcement/createAnnouncemen
 import listAnnouncementService from "../service/announcement/listAnnouncement.service";
 import deleteAnnouncementService from "../service/announcement/deleteAnnouncement.service";
 import updateAnnouncementService from "../service/announcement/updateAnnouncement.service";
+import listAnnouncementIdService from "../service/announcement/listAnnouncementId.service";
 
 const createAnnouncementController = async (
   req: Request,
@@ -31,6 +32,14 @@ const listAnnouncementController = async (
 
   return res.status(200).json(announcements);
 };
+
+const listAnnouncementIdController = async (request: Request, response: Response) => {
+  const announId = request.params.id
+
+  const announ = await listAnnouncementIdService(announId)
+
+  return response.status(200).json(announ)
+}
 
 const updateAnnouncementController = async (
   req: Request,
@@ -61,4 +70,5 @@ export {
   listAnnouncementController,
   updateAnnouncementController,
   deleteAnnouncementController,
+  listAnnouncementIdController
 };
