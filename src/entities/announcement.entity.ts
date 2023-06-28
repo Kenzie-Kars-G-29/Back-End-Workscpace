@@ -1,14 +1,7 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import User from "./user.entity";
 import ImageUrl from "./imageUrl.entity";
+import { Comment } from "./comment.entity";
 
 @Entity("announcements")
 class Announcement {
@@ -45,14 +38,15 @@ class Announcement {
   @Column({})
   isPublic: boolean;
 
-  //Relação many to one com User
-  @ManyToOne(() => User, (user) => user.announcement, {onDelete: "CASCADE"})
+  @ManyToOne(() => User, (user) => user.announcements, {onDelete: "CASCADE"})
   user: User
   
-  //Relação one to one com ImageUrl
   @OneToOne((type) => ImageUrl, (image) => image.announcement)
   @JoinColumn()
   image: ImageUrl;
+
+  @OneToMany(() => Comment, (comment) => comment.announcement)
+  comments: Comment[];
 }
 
 export default Announcement;

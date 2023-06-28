@@ -8,9 +8,13 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Announcement from "./announcement.entity";
+import { Comment } from "./comment.entity";
 
 @Entity("users")
 class User {
+  static findById(id: any) {
+      throw new Error('Method not implemented.');
+  }
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -23,10 +27,10 @@ class User {
   @Column({ length: 120 })
   password: string;
 
-  @Column({ length: 12 })
+  @Column({ length: 11, nullable: true})
   cpf: string;
 
-  @Column({ length: 12 })
+  @Column({ length: 15, nullable: true })
   phone: string;
 
   @Column({ type: "date" })
@@ -35,7 +39,7 @@ class User {
   @Column({})
   description: string;
 
-  @Column({ length: 8 })
+  @Column({ length: 9, nullable: true })
   cep: string;
 
   @Column({ length: 45 })
@@ -69,8 +73,10 @@ class User {
   }
 
   @OneToMany(() => Announcement, (announcement) => announcement.user)
-  announcement: Announcement[]
+  announcements: Announcement[];
 
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 }
 
 export default User;

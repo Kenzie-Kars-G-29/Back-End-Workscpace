@@ -8,6 +8,7 @@ import { userRoutes } from "./routes/user.routes";
 import { loginRouter } from "./routes/login.routes";
 import swaggerUI from "swagger-ui-express"
 import swaggerDocument from "../swagger.json"
+import commentRouter  from "./routes/comment.routes";
 
 const app: Application = express();
 app.use(cors());
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use("/announcement", announcementRouter);
 app.use("/users", userRoutes);
 app.use("/login", loginRouter);
+
+app.use("/comments", commentRouter);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
