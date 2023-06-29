@@ -9,15 +9,18 @@ const listAnnouncementIdService = async (id: string) => {
   const repository: Repository<Announcement> =
     AppDataSource.getRepository(Announcement);
 
-    const announcement = await repository.findOne({
-      where: {
-        id: id
-      }
-    })
+  const announcement = await repository.findOne({
+    where: {
+      id: id,
+    },
+    relations: {
+      user: true,
+    },
+  });
 
-    if (!announcement) {
-      throw new AppError("Announcement not found.", 404);
-    }
+  if (!announcement) {
+    throw new AppError("Announcement not found.", 404);
+  }
 
   return announcement;
 };
