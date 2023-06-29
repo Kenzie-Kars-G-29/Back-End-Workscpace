@@ -49,16 +49,14 @@ export class CommentService {
     return comment;
   }
 
-  async getCommentsByAnnouncementId(
-    announcementId: string
-  ): Promise<Comment[]> {
-    const commentRepository: Repository<Comment> =
-      AppDataSource.getRepository(Comment);
-
+  async getCommentsByAnnouncementId(announcementId: string): Promise<Comment[]> {
+    const commentRepository: Repository<Comment> = AppDataSource.getRepository(Comment);
+  
     const comments = await commentRepository.find({
       where: { announcement: { id: announcementId } },
+      relations: ["user", "announcement"],
     });
-
+  
     return comments;
   }
 }
