@@ -5,20 +5,20 @@ const commentService = new CommentService();
 
 export class CommentController {
   async createComment(req: Request, res: Response) {
-    const { text, user, announcement } = req.body;
+    const { text, userId, announcementId } = req.body;
 
-    try {
-      const comment = await commentService.createComment(
-        text,
-        user,
-        announcement
-      );
+  try {
+    const comment = await commentService.createComment(
+      text,
+      userId,
+      announcementId
+    );
 
-      return res.status(201).json(comment);
-    } catch (err: any) {
-      console.log(err);
-      return res.status(500).json({ error: err.message });
-    }
+    return res.status(201).json(comment);
+  } catch (err: any) {
+    console.log(err);
+    return res.status(500).json({ error: err.message });
+  }
   }
 
   async getComment(req: Request, res: Response) {
@@ -28,7 +28,7 @@ export class CommentController {
       const comment = await commentService.getComment(id);
       return res.json(comment);
     } catch (err: any) {
-      // declare err as any
+     
       return res.status(500).json({ error: err.message });
     }
   }

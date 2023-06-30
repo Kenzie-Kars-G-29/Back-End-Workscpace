@@ -22,12 +22,14 @@ export class CommentService {
     const announcement = await announcementRepository.findOne({
       where: { id: announcementId },
     });
+console.log(user);
 
     if (!user || !announcement) {
       throw new AppError("User or Announcement not found", 404);
     }
 
     const comment = commentRepository.create({ text, user, announcement });
+console.log(comment);
 
     await commentRepository.save(comment);
 
