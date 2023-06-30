@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts nodemon src/index.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "test": "jest --verbose --runInBand"
+    "test": "jest --verbose --runInBand",
+    "build": "yarn && tsc && yarn run typeorm-ts-node-commonjs migration:run -d ./dist/data-source",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@prisma/client": "^4.16.0",
