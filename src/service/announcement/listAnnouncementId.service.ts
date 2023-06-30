@@ -13,9 +13,7 @@ const listAnnouncementIdService = async (id: string) => {
     where: {
       id: id,
     },
-    relations: {
-      user: true,
-    },
+    relations: ["user.announcements", "image"],
   });
 
   if (!announcement) {
