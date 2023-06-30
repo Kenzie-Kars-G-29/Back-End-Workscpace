@@ -32,7 +32,7 @@ announcementRouter.put(
   ensureIsSellerMiddleware,
   ensureDataIsValid(createAnnouncementWithImageSchema),
   updateAnnouncementController
-); // Token is required
+);
 
 announcementRouter.delete(
   "/:id",
@@ -40,6 +40,6 @@ announcementRouter.delete(
   ensureIsSellerMiddleware,
   ensureAnnouncementExist,
   deleteAnnouncementController
-); // Token is required
+);
 
 export default announcementRouter;

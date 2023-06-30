@@ -28,6 +28,8 @@ const listAnnouncementController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
+  console.log("parametros", req.query)
+
   const announcements = await listAnnouncementService();
 
   return res.status(200).json(announcements);
