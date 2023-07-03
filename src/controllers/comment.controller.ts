@@ -5,12 +5,12 @@ const commentService = new CommentService();
 
 export class CommentController {
   async createComment(req: Request, res: Response) {
-    const { text, user, announcement } = req.body;
+    const { text, userId, announcement } = req.body;
 
     try {
       const comment = await commentService.createComment(
         text,
-        user,
+        userId,
         announcement
       );
 

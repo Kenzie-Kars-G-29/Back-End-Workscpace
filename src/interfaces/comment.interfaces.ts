@@ -5,6 +5,6 @@ export interface Comment {
   id: string;
   text: string;
   user: User;
-  announcement: Announcement;
+  announcements: Announcement;
   createdAt: Date;
 }
