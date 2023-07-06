@@ -41,7 +41,7 @@ const userSchema = z.object({
 const returnUserSchema = userSchema
   .extend({
     id: z.string(),
-    announcement: z.array(createAnnouncementWithImageReturnSchema).default([]),
+    announcements: z.array(createAnnouncementWithImageReturnSchema).default([]),
   }).omit({ password: true })
 
 

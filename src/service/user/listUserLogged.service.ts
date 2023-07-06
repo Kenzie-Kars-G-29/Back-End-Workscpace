@@ -23,7 +23,7 @@ const listUserLoggedService = async (token: string) => {
     where: {
       id: userId
     },
-    relations: ['announcement', 'announcement.image'],
+    relations: ['announcements', 'announcements.image'],
     select: ['id',
       'name',
       'email',
@@ -39,6 +39,7 @@ const listUserLoggedService = async (token: string) => {
       'complement',
       'isSeller'],
   })
+  return user;
 }
 
 export default listUserLoggedService;
