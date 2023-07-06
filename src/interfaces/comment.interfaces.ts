@@ -1,5 +1,11 @@
-import Announcement from "../entities/announcement.entity";
-import User from "../entities/user.entity";
+import { z } from "zod";
+import { DeepPartial } from "typeorm";
+import {
+  allCommentSchema,
+  commentSchema,
+  createCommentSchema,
+} from "../schema/comment.schema";
+
 
 export interface Comment {
   id: string;
@@ -8,3 +14,11 @@ export interface Comment {
   announcements: Announcement;
   createdAt: Date;
 }
+
+type iComment = z.infer<typeof commentSchema>;
+type iCreateComment = z.infer<typeof createCommentSchema>;
+type iAllComment = z.infer<typeof allCommentSchema>;
+type iUpdateComment = DeepPartial<iComment>;
+
+export type { iComment, iCreateComment, iAllComment, iUpdateComment };
+

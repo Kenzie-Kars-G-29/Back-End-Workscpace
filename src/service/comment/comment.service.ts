@@ -3,15 +3,16 @@ import { Comment } from "../../entities/comment.entity";
 import User from "../../entities/user.entity";
 import Announcement from "../../entities/announcement.entity";
 import { AppDataSource } from "../../data-source";
-import jwt from "jsonwebtoken";
 import { AppError } from "../../errors";
+import { iComment, iUpdateComment } from "../../interfaces/comment.interfaces";
+import { commentSchema } from "../../schema/comment.schema";
 
 export class CommentService {
   async createComment(
     text: string,
     userId: string,
     announcementId: string
-  ): Promise<Comment> {
+  ): Promise<iComment> {
     const commentRepository: Repository<Comment> =
       AppDataSource.getRepository(Comment);
     const userRepository: Repository<User> = AppDataSource.getRepository(User);
@@ -31,7 +32,9 @@ export class CommentService {
 
     await commentRepository.save(comment);
 
-    return comment;
+    const newComment = commentSchema.parse(comment);
+
+    return newComment;
   }
 
   async getComment(id: string): Promise<Comment> {
@@ -39,7 +42,7 @@ export class CommentService {
       AppDataSource.getRepository(Comment);
 
     const comment = await commentRepository.findOne({
-      where: { id: Number(id) },
+      where: { id: id },
     });
 
     if (!comment) {
@@ -61,5 +64,50 @@ export class CommentService {
     });
 
     return comments;
+  }
+
+  async updateCommentService(
+    data: Partial<iUpdateComment>,
+    commentId: string
+  ): Promise<iComment> {
+    const commentRepository: Repository<Comment> =
+      AppDataSource.getRepository(Comment);
+    const comment: Comment | null = await commentRepository.findOne({
+      where: { id: commentId },
+      relations: {
+        announcement: true,
+        user: true,
+      },
+    });
+
+    if (comment === null) {
+      throw new AppError("Comment not found", 404);
+    }
+
+    const newComment = commentRepository.create({
+      ...comment,
+      ...data,
+    });
+
+    await commentRepository.save(newComment);
+
+    return commentSchema.parse(newComment);
+  }
+
+  async deleteComentsByIdService(commentId: string): Promise<void> {
+    const commentRepository: Repository<Comment> =
+      AppDataSource.getRepository(Comment);
+
+    const comment: Comment | null = await commentRepository.findOne({
+      where: {
+        id: commentId,
+      },
+    });
+
+    if (!comment) {
+      throw new AppError("Comment not found", 404);
+    }
+
+    await commentRepository.remove(comment);
   }
 }
