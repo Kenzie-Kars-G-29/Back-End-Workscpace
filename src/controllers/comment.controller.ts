@@ -9,7 +9,7 @@ export class CommentController {
     const { text, userId, announcementId } = req.body;
 
     try {
-      const comment: iComment = await commentService.createComment(
+      const comment = await commentService.createComment(
         text,
         userId,
         announcementId

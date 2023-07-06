@@ -52,6 +52,7 @@ const returnUserSchema = userSchema
   })
   .omit({ password: true });
 
+
 const returnAllUsersSchema = returnUserSchema.array();
 
 const userSchemaUpdate = userSchema.partial();

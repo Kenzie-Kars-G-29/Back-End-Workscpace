@@ -21,28 +21,25 @@ const listUserLoggedService = async (token: string) => {
 
   const user = await userRepository.findOne({
     where: {
-      id: userId,
+      id: userId
     },
-    relations: ["announcements.image"],
-    select: [
-      "id",
-      "name",
-      "email",
-      "cpf",
-      "phone",
-      "birthday",
-      "description",
-      "cep",
-      "state",
-      "city",
-      "street",
-      "number",
-      "complement",
-      "isSeller",
-    ],
-  });
-
+    relations: ['announcements', 'announcements.image'],
+    select: ['id',
+      'name',
+      'email',
+      'cpf',
+      'phone',
+      'birthday',
+      'description',
+      'cep',
+      'state',
+      'city',
+      'street',
+      'number',
+      'complement',
+      'isSeller'],
+  })
   return user;
-};
+}
 
 export default listUserLoggedService;

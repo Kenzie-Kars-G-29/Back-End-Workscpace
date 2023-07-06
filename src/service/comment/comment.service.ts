@@ -60,7 +60,7 @@ export class CommentService {
 
     const comments = await commentRepository.find({
       where: { announcement: { id: announcementId } },
-      relations: ["user", "announcement"],
+      relations: ["user", "announcement"]
     });
 
     return comments;

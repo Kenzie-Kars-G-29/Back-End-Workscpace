@@ -38,9 +38,9 @@ class Announcement {
   @Column({})
   isPublic: boolean;
 
-  @ManyToOne(() => User, (user) => user.announcements, {onDelete: "CASCADE"})
+  @ManyToOne(() => User, (user) => user.announcements, { onDelete: "CASCADE" })
   user: User
-  
+
   @OneToOne((type) => ImageUrl, (image) => image.announcement)
   @JoinColumn()
   image: ImageUrl;

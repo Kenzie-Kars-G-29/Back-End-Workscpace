@@ -9,11 +9,17 @@ const listAnnouncementIdService = async (id: string) => {
   const repository: Repository<Announcement> =
     AppDataSource.getRepository(Announcement);
 
+  /*   const announcement = await repository.findOne({
+      where: {
+        id: id
+      },
+      relations: ["user"]
+    }) */
   const announcement = await repository.findOne({
     where: {
       id: id,
     },
-    relations: ["user.announcements", "image"],
+    relations: ["user", "user.announcements", "image"],
   });
 
   if (!announcement) {
