@@ -10,7 +10,7 @@
     "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts nodemon src/index.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "jest --verbose --runInBand",
-    "build": "tsc && npm run typeorm-ts-node-commonjs migration:run --d ./dist/src/data-source.js",
+    "build": "tsc && npm run typeorm migration:run --d ./dist/src/data-source.js",
     "start": "node --experimental-modules dist/src/server.js"
   },
   "dependencies": {
