@@ -1,0 +1,374 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Motors Shop",
+        "description": "Documentation from Motors Shop API",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "paths": {
+        "/users": {
+            "get": {
+                "description": "Rota que busca todos os usuários",
+                "tags": ["Users"],
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "description": "Rota que cria um usuário",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": { "type": "string" },
+                                    "email": { "type": "string" },
+                                    "password": { "type": "string" },
+                                    "cpf": { "type": "string" },
+                                    "phone": { "type": "string" },
+                                    "birthday": { "type": "string" },
+                                    "description": { "type": "string" },
+                                    "cep": { "type": "string" },
+                                    "state": { "type": "string" },
+                                    "city": { "type": "string" },
+                                    "street": { "type": "string" },
+                                    "number": { "type": "string" },
+                                    "complement": { "type": "string" }
+                                },
+                                "example": {
+                                    "name": "João",
+                                    "email": "jo@mail.com",
+                                    "password": "12345",
+                                    "cpf": "42951230800",
+                                    "phone": "1997126474",
+                                    "birthday": "05/11/1995",
+                                    "description": "descricao",
+                                    "cep": "18807030",
+                                    "state": "São Paulo",
+                                    "city": "Piraju",
+                                    "street": "Rua Carlos Ferreira",
+                                    "number": "223",
+                                    "complement": "Vila São Jose"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "400": {
+                        "description": "Email already exists"
+                    },
+                    "201": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/users/userlogged": {
+            "get": {
+                "description": "Rota que busca o usuário logado",
+                "tags": ["Users"],
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "description": "Rota que busca o usuário pelo ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": { "type": "string" },
+                        "required": true
+                    }
+                ],
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Rota que atualiza o usuário pelo ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": { "type": "string" },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": { "type": "string" },
+                                    "email": { "type": "string" },
+                                    "password": { "type": "string" },
+                                    "cpf": { "type": "string" },
+                                    "phone": { "type": "string" },
+                                    "birthday": { "type": "string" },
+                                    "description": { "type": "string" },
+                                    "cep": { "type": "string" },
+                                    "state": { "type": "string" },
+                                    "city": { "type": "string" },
+                                    "street": { "type": "string" },
+                                    "number": { "type": "string" },
+                                    "complement": { "type": "string" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Rota que exclui um usuário pelo ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "Rota para autenticação de usuário",
+                "tags": ["Login"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": { "type": "string" },
+                                    "password": { "type": "string" }
+                                },
+                                "example": {
+                                    "email": "jo@mail.com",
+                                    "password": "12345"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/announcement": {
+            "get": {
+                "description": "Rota que busca todos os anúncios",
+                "tags": ["Announcement"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "description": "Rota que cria um anúncio",
+                "tags": ["Announcement"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": { "type": "string" },
+                                    "brand": { "type": "string" },
+                                    "model": { "type": "string" },
+                                    "color": { "type": "string" },
+                                    "year": { "type": "string" },
+                                    "fuel": { "type": "string" },
+                                    "km": { "type": "number" },
+                                    "price": { "type": "number" },
+                                    "fipeTablePrice": { "type": "number" },
+                                    "isPublic": { "type": "boolean" },
+                                    "images": {
+                                        "type": "object",
+                                        "properties": {
+                                            "coverImage": { "type": "string" },
+                                            "firstImage": { "type": "string" },
+                                            "secondImage": { "type": "string" }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "description": "Um carro bonito",
+                                    "brand": "Fiat",
+                                    "model": "Uno",
+                                    "color": "Branco",
+                                    "year": "2020",
+                                    "fuel": "Gasolina",
+                                    "km": 8900,
+                                    "price": 15900,
+                                    "fipeTablePrice": 120.0,
+                                    "isPublic": true,
+                                    "images": {
+                                        "coverImage": "https://www.motortrend.com/uploads/2022/09/001-1969-Dodge-Charger-Daytona-Green-Mecum-Dallas-manual-wing-NASCAR-Superbird-440.jpg?fit=around%7C875:492",
+                                        "firstImage": "https://www.motortrend.com/uploads/2022/09/001-1969-Dodge-Charger-Daytona-Green-Mecum-Dallas-manual-wing-NASCAR-Superbird-440.jpg?fit=around%7C875:492",
+                                        "secondImage": "https://www.motortrend.com/uploads/2022/09/001-1969-Dodge-Charger-Daytona-Green-Mecum-Dallas-manual-wing-NASCAR-Superbird-440.jpg?fit=around%7C875:492"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/announcement/{id}": {
+            "patch": {
+                "description": "Rota que atualiza o anúncio por ID",
+                "tags": ["Announcement"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": { "type": "string" },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": { "type": "string" },
+                                    "brand": { "type": "string" },
+                                    "model": { "type": "string" },
+                                    "color": { "type": "string" },
+                                    "year": { "type": "string" },
+                                    "fuel": { "type": "string" },
+                                    "km": { "type": "number" },
+                                    "price": { "type": "number" },
+                                    "fipeTablePrice": { "type": "number" },
+                                    "isPublic": { "type": "boolean" },
+                                    "images": {
+                                        "type": "object",
+                                        "properties": {
+                                            "coverImage": { "type": "string" },
+                                            "firstImage": { "type": "string" },
+                                            "secondImage": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Rota que exclui um anúncio pelo ID",
+                "tags": ["Announcement"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
