@@ -1,7 +1,8 @@
 {
   "name": "Back-End-Workscpace",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server",
+  "types": "./dist",
   "repository": "git@github.com:Kenzie-Kars-G-29/Back-End-Workscpace.git",
   "author": "Eliseu Andrade <eliseu.andrade1998@gmail.com>",
   "license": "MIT",
@@ -9,8 +10,8 @@
     "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts nodemon src/index.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "jest --verbose --runInBand",
-    "build": "yarn && tsc && yarn run typeorm-ts-node-commonjs migration:run -d ./dist/data-source",
-    "start": "node dist/server.js"
+    "build": "yarn && tsc && yarn run typeorm-ts-node-commonjs migration:run --d ./dist/src/data-source.js",
+    "start": "node --experimental-modules dist/src/server.js"
   },
   "dependencies": {
     "@prisma/client": "^4.16.0",
@@ -33,6 +34,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@railway/cli": "^3.3.1",
     "@types/bcrypt": "^5.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",

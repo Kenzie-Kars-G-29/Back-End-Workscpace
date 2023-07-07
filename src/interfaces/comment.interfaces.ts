@@ -5,6 +5,8 @@ import {
   commentSchema,
   createCommentSchema,
 } from "../schema/comment.schema";
+import User from "../entities/user.entity";
+import Announcement from "../entities/announcement.entity";
 
 
 export interface Comment {
