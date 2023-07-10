@@ -34,7 +34,6 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@railway/cli": "^3.3.1",
     "@types/bcrypt": "^5.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.13",
